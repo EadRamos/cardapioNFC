@@ -14,7 +14,6 @@ import './style.css';
 
 const app = createApp(App);
 
-
 app.use(createPinia());
 app.use(router);
 

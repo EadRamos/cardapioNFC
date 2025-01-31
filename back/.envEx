@@ -1,0 +1,8 @@
+PG_HOST=localhost
+PG_USER=user
+PG_PASSWORD=password
+PG_DB=postgres
+BD=postgres
+PORT=3434
+ENVERONMENT=development
+TOKEN_LOGIN=12345678

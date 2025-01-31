@@ -1,79 +1,79 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  --font-size: 62.5%;
+  --color-primary: rgb(255, 255, 255);
+  --color-secundary: rgb(249, 249, 249);
+  --color-primary-inverse: rgb(0,0,0);
+  --color-primary-input: rgb(245, 245, 245);
+  --color-main: rgb(71, 175, 255);
+  --gradient-primary: linear-gradient(90deg, rgb(71, 175, 255), rgb(63, 146, 255));
+  --gradient-secundary: linear-gradient(90deg, rgb(252, 65, 86), rgb(255, 48, 52));
+  font-size: var(--font-size);
+  
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+* {
+  font-family: "fontLight", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
+  text-decoration: none;
+}
+
+body, #app {
+  width: 100vw;
+  height: 100vh;
+}
+#app.dark {
+  --color-primary: rgb(35, 35, 35);
+  --color-secundary: rgb(30, 29, 29);
+  --color-primary-inverse: rgb(240,240,240);
+  --color-primary-input: rgb(38, 38, 38);
+}
+
+.round {
+  border-radius: 1rem;
+}
+.header {
+  width: 100%;
+  height: fit-content;
+  padding: 2rem 1rem;
+}
+.center {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.colum {
+  flex-direction: column;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.shadow {
+  box-shadow: 0.5rem 0.5rem 1.5rem 0 rgba(0, 0, 0, 0.05);
 }
-button:hover {
-  border-color: #646cff;
+.center-h {
+  display: flex;
+  justify-content: center;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.end-h {
+  display: flex;
+  justify-content: end;
 }
-
-.card {
-  padding: 2em;
+.start-h {
+  display: flex;
+  justify-content: start;
 }
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.end-v {
+  display: flex;
+  align-items: end;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.start-v {
+  display: flex;
+  align-items: start;
+}
+.center-v {
+  display: flex;
+  align-items: center;
+}
+.full {
+  width: 100%;
+  height: 100%;
 }
