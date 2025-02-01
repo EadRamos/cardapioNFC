@@ -1,1 +1,1 @@
-BACK_API=api.meudominio.com
+BACK_API=http://localhost:8001

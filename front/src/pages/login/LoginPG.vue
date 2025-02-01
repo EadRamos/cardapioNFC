@@ -1,5 +1,6 @@
 <template>
     <div id="loginPG">
+        
         <div 
         :class="[
             'shadow',
@@ -33,6 +34,8 @@
                 :required="true"
                 :label="'Senha'"/>
 
+                <simple-message :messages="error" :exit="() => error = []"/>
+
                 <btn
                 @click="login"
                 :type="mobile ? 'full' : 'half'"
@@ -49,6 +52,7 @@ import Input from '@/components/inputs/Input.vue';
 import BaseInput from '@/components/inputs/BaseInput.vue';
 import Button from '@/components/buttons/Button.vue';
 import PopButton from '@/components/buttons/PopButton.vue';
+import SimpleCardMessage from '@/components/messages/SimpleCardMessage.vue';
 
 export default {
     name: 'LoginPG',
@@ -56,13 +60,18 @@ export default {
         'input-login': Input,
         'base-input': BaseInput,
         'btn': Button,
-        'pop-btn': PopButton
+        'pop-btn': PopButton,
+        'simple-message': SimpleCardMessage
+    },
+    data() {
+        return {
+            error: [],
+        };
     },
     methods: {
         login() {
             const errors = this.$refs.baseInputLogin.validate();
             
-            errors ? console.log(errors) : console.log('sem erros')
         }
     }
 }

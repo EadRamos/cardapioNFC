@@ -1,20 +1,30 @@
 <template>
+    <div style="width: 100%; height: auto;">
+    
     <div class="input-area">
-
+        
         <input
         v-model="value"
-        class="input"
+        :class="{'input': true, 'inputError': error.length > 0}"
         :type="type"
         :placeholder="placeholder"
         :required="require"
+        @click="error.length && (error = [])"
         @input="returnInput(value)"/>
         
         <label class="input-label">{{label}}</label>
+        <span v-if="error.length > 0" class="inputMessageError">{{ error[0] }}</span>
+    </div>
     </div>
 </template>
 <script>
+import SimpleCardMessage from '@/components/messages/SimpleCardMessage.vue';
+
 export default {
     name: 'Input',
+    components: {
+        'simple-message': SimpleCardMessage,
+    },
     props: {
         type: {
             type: String,
@@ -50,15 +60,18 @@ export default {
     methods: {
         validate() {
             
-            this.rules?.forEach( rule => {
+            if(!this.error.length) {
+                this.rules?.forEach( rule => {
                 
-                if (rule(this.value)) {
-                    const error = rule(this.value);
-                    if(error){
-                        this.error.push(error);
+                    if (rule(this.value)) {
+                        const error = rule(this.value);
+                        if(error){
+                            this.error.push(error);
+                        }
                     }
-                }
-            });
+                });
+            }
+
             return this.error.length > 0 ? this.error : null;
         }
     },
@@ -69,10 +82,18 @@ export default {
 }
 </script>
 <style scoped>
+.inputMessageError {
+    position: relative;
+    top: 0.1rem;
+    color: var(--color-error);
+}
 .input-area {
     width: 100%;
     position: relative;
     overflow: visible;
+}
+.inputError {
+    border: 1px solid var(--color-error) !important;
 }
 .input {
     width: 100%;
