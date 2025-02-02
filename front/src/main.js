@@ -21,4 +21,5 @@ app.config.globalProperties.axios = axios;
 app.config.globalProperties.mobile = /Mobi|Android|Iphone/.test(navigator.userAgent);
 app.config.globalProperties.pinia = authStore();
 
+if(localStorage.getItem('modo')) document.getElementById('app').classList.add('dark');
 app.mount('#app');

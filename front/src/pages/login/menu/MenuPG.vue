@@ -1,7 +1,7 @@
 <template>
-    <div id="menuPG" class="full" style="position: relative; background-color: var(--color-secundary);">
+    <div id="menuPG" class="full">
         <template v-if="true">
-            <div style="position: absolute; width: 100%; height: 6.5rem; top: 0; left: 0;">
+            <div style=" width: 100%;">
                 <input-pesquisa
                 label="Pesquisa"
                 :labelVisible="false"
@@ -9,8 +9,8 @@
                 style="margin: 0.5rem; width: calc(100% - 1rem);"/>
 
                 <div class="menuPGFilter">
-                    <button-select class="filterMenuPG" label="Menor Preço" />
-                    <button-select class="filterMenuPG" label="Maior Preço" />
+                    <button-select class="filterMenuPG" label="Menor Preço" @click="filterMenorValor()" />
+                    <button-select class="filterMenuPG" label="Maior Preço" @click="filterMaiorValor()"/>
                     <select-cardapio
                     class="filterMenuPG"
                     label="Categoria"
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="listItensMenuPGMobile">
-                <div style="width: 100%; height: fit-content; margin-bottom: 0.5rem;" v-for="(item, key) in itensFilter">
-                    <div style="display: flex; justify-content: space-between; padding: 0.5rem 1rem;">
-                        <h1 style="font-size: 1.5rem;">{{item.title}}</h1>
-                        <i class="fa-solid fa-up-right-and-down-left-from-center" style="font-size: 1.5rem;"/>
+                <div class="categoryListItensMenuPGMobile" v-for="(item, key) in filtro">
+                    <div class="titleCategoryList">
+                        <h1>{{item.title}}</h1>
+                        <i class="fa-solid fa-angles-right" />
                     </div>
                     <div class="scrollItensMenuMobile">
                         <card-item-menu v-for="(card, keyS) in item.values" :price="card" title="Eadmwo awd a wad awdawd awd aw da wda dw d awd awd  adwdawda awd awda wda wdadda"/>
@@ -57,7 +57,7 @@ export default {
             itens: [
                 {
                     title: 'Pizza',
-                    values: ['2,50','3,40']
+                    values: ['2,50','3,40','1,25','2,50','1,25']
                 },
                 {
                     title: 'Hamburguer',
@@ -65,27 +65,95 @@ export default {
                 },
                 {
                     title: 'Pizza',
-                    values: ['2,50','3,40']
+                    values: ['2,50','3,40','1,25','2,50','1,25']
                 },
             ],
             categoria: '',
+            menorPreco: true,
+            maiorPreco: false,
             categorias: [],
             itensFilter: []
         }
     },
-    watch: {
-        categoria(val){
-            this.categoria = val;
+    computed: {
+        filtro(){
             let filter = [];
-            if(this.categoria){
-                this.filter = this.itens.filter((item) => item.title.includes(this.categoria))
+            if(this.categoria){ 
+                filter = this.itens.filter((item) => item.title.includes(this.categoria))
             }
             if(filter.length > 0) {
-                this.itensFilter = this.filter;
+                if(this.menorPreco){
+                    filter = filter.map((item) => {
+                        const vall = item.values.sort((a,b) => {
+                            if(a>b) return 1;
+
+                            return a<b ? -1 : 0;
+                            
+                        })
+                        return {
+                            title: item.title,
+                            values: vall
+                        }
+                    })
+                }
+                if(this.maiorPreco){
+                    filter = filter.map((item) => {
+                        const vall = item.values.sort(
+                            (a,b) => {
+                                if(a<b) return 1;
+
+                                return a>b ? -1 : 0;
+                                
+                            })
+                        return {
+                            title: item.title,
+                            values: vall
+                        }
+                    })
+                }
+                return filter;
             } else {
-                this.itensFilter = this.itens
+                if(this.menorPreco){
+                    filter = this.itens.map((item) => {
+                        const vall = item.values.sort((a,b) => {
+                            if(a>b) return 1;
+
+                            return a<b ? -1 : 0;
+                            
+                        })
+                        return {
+                            title: item.title,
+                            values: vall
+                        }
+                    })
+                }
+                if(this.maiorPreco){
+                    filter = this.itens.map((item) => {
+                        const vall = item.values.sort((a,b) => {
+                            if(a<b) return 1;
+
+                            return a>b ? -1 : 0;
+                            
+                        })
+                        return {
+                            title: item.title,
+                            values: vall
+                        }
+                    })
+                }
+                return filter.length > 0 ? filter : this.itens;
             }
             
+        }
+    },
+    methods: {
+        filterMenorValor() {
+            this.menorPreco = !this.menorPreco;
+            this.maiorPreco = false;
+        },
+        filterMaiorValor() {
+            this.maiorPreco = !this.maiorPreco;
+            this.menorPreco = false;
         }
     },
     mounted() {
@@ -100,7 +168,12 @@ export default {
     bottom: 0;
 }
 #menuPG {
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    min-height: 100vh;
+
+    background-color: var(--color-secundary);
 }
 .filterMenuPG {
     min-width: 8rem;
@@ -109,7 +182,7 @@ export default {
 }
 .menuPGFilter {
     width: 100%;
-    height: 50vh;
+    height: fit-content;
     padding: 0.3rem 0.5rem;
     display: flex;
     gap: 1rem;
@@ -127,11 +200,9 @@ export default {
 }
 .listItensMenuPGMobile {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 6.5rem;
-    overflow-y: auto;
+ 
     margin-bottom: 5rem;
 
     color: var(--color-primary-inverse);
@@ -148,5 +219,19 @@ export default {
 }
 .scrollItensMenuMobile::-webkit-scrollbar {
     display: none;
+}
+
+.categoryListItensMenuPGMobile {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 0.5rem;
+}
+.categoryListItensMenuPGMobile .titleCategoryList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+
+    font-size: 1rem;
 }
 </style>

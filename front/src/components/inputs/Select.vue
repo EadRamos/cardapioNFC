@@ -1,18 +1,22 @@
 <template>
-    <div class="selectBase" :style="[minimal ? 'width: '+size : 'width: 100%']">
+    <div class="selectBase" :style="[sizeMinimal(), selectPopupMobile()]">
         <div ref="refSelectBase" @click="clickSelectF" class="buttonSelectBase round center">
 
-            <label v-if="labelVisible == false && !value || labelVisible" :class="{'labelSelectBase': true, 'labelSelectBaseFocus': value != ''}">{{ label }}</label>
+            <label v-if="labelCanVisible()" :class="{'labelSelectBase': true, 'labelSelectBaseFocus': value != ''}">
+                {{ label }}
+            </label>
 
-            <span v-if="value" style="line-height: 2.5rem;">{{ primaryElement(value) }}</span>
+            <span v-if="value" style="line-height: 2.5rem;">
+                {{ primaryElement(value) }}
+            </span>
 
             <i class="fa-solid fa-angle-down iconSelectBase" :style="[clickSelect ? 'transform: translateY(-50%);' : 'transform: rotate(180deg)  translateY(50%);']"/>
             
         </div>
-        <div :class="{'opcoesSelectBase shadow': true,'opcoesSelectBaseVisible': clickSelect}">
+        <div :class="{'optionsSelectBase shadow': true,'optionsSelectBaseVisible': clickSelect, 'optionSelectBaseMobile': mobile}">
             <ul>
-                <li v-if="value" @click="value = ''">Nem um</li>
-                <li v-for="item in values" @click="value = item" :style="item == value ? {backgroundColor: 'var(--color-main)'} : {}">{{ primaryElement(item) }}</li>
+                <li v-if="value" @click="value = ''">Limpar</li>
+                <li v-for="item in values" @click="value = item" :style="{'background-color: var(--color-main)': item == value}">{{ primaryElement(item) }}</li>
             </ul>
         </div>
     </div>
@@ -88,8 +92,16 @@ export default {
             else
             {
                 return value;
-            }
-                
+            }     
+        },
+        sizeMinimal() {
+            return this.minimal ? `width: ${this.size}` : 'width: 100%';
+        },
+        selectPopupMobile() {
+            return this.mobile ? '' : 'position: relative;';
+        },
+        labelCanVisible() {
+            return (this.labelVisible == false && !this.value) || this.labelVisible;
         }
     }
 }
@@ -104,7 +116,6 @@ export default {
 }
 .selectBase {
     width: 100%;
-    position: relative;
     overflow: visible;
     color: var(--color-primary-inverse);
 }
@@ -140,7 +151,7 @@ export default {
     transform: translateY(-100%);
     color: var(--color-primary-inverse);
 }
-.opcoesSelectBase {
+.optionsSelectBase {
     display: none;
     max-height: 10rem;
     height: max-content;
@@ -159,14 +170,14 @@ export default {
     z-index: 1000;
     transition: opacity 1s ease;
 }
-.opcoesSelectBase::-webkit-scrollbar {
+.optionsSelectBase::-webkit-scrollbar {
     width: 1rem;
 }
-.opcoesSelectBase::-webkit-scrollbar-thumb {
+.optionsSelectBase::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     background-color: var(--color-principalClara);
 }
-.opcoesSelectBaseVisible {
+.optionsSelectBaseVisible {
     display: block;
     animation-duration: 1s;
     animation-name: animationAppearSelectInput;
@@ -174,19 +185,34 @@ export default {
     opacity: 1;
     transition: opacity 1s ease;
 }
-.opcoesSelectBase > ul {
+.optionsSelectBase > ul {
     width: 100%;
     height: 100%;
 }
-.opcoesSelectBase > ul > li {
+.optionsSelectBase > ul > li {
     width: 100%;
     min-height: 2rem;
     padding: 0 1rem;
     line-height: 2rem;
     transition: background-color 0.2s ease-in-out;
 }
-.opcoesSelectBase > ul > li:hover {
+.optionsSelectBase > ul > li:hover {
     background-color: rgba(0, 0, 0, 0.2);
+}
+.optionSelectBaseMobile {
+    
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    max-height: 50%;
+    padding-top: 2rem;
+
+    border-radius:2rem 2rem 0 0;
+    
+    animation: none;
+    transform: scaleX(100%);
+    background-image: var(--gradient-primary);
 }
 @keyframes animationSelectInput {
     0% {

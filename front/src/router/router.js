@@ -11,6 +11,11 @@ const routes = [
         name: 'Home',
     },
     {
+        path: '/cardapio',
+        component: MenuPG,
+        name: 'Cardapio',
+    },
+    {
         path: '/login',
         component: LoginPG,
         name: 'Login',

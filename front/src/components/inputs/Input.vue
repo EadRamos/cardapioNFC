@@ -1,20 +1,25 @@
 <template>
     
-        <div class="areaInputBase">
-            
-            <input
-            v-model="value"
-            :class="{'inputBase': true, 'inputBaseError': error.length > 0}"
-            :type="type"
-            :placeholder="placeholder"
-            :required="require"
-            @click="error.length && (error = [])"
-            @input="returnInput(value)"/>
-            
-            <label v-if="labelVisible == false && !value || labelVisible" :class="{'inputBaseLabel': true, 'visibleFocus': !labelVisible}">{{label}}</label>
-            <i v-if="icon" :class="[icon, 'inputBaseIcon']"/>
-            <span v-if="error.length > 0" class="inputBaseMessageError">{{ error[0] }}</span>
-        </div>
+    <div class="areaInputBase">
+        
+        <input
+        v-model="value"
+        :class="{'inputBase': true, 'inputBaseError': error.length > 0}"
+        :type="type"
+        :placeholder="placeholder"
+        :required="require"
+        @click="error.length && (error = [])"
+        @input="returnInput(value)"/>
+        
+        <label v-if="labelVisible == false && !value || labelVisible" :class="{'inputBaseLabel': true, 'visibleFocus': !labelVisible}">
+            {{label}}
+        </label>
+        <i v-if="icon" :class="[icon, 'inputBaseIcon']"/>
+        
+        <span v-if="error.length > 0" class="inputBaseMessageError">
+            {{ error[0] }}
+        </span>
+    </div>
 
 </template>
 <script>
@@ -109,6 +114,7 @@ export default {
     width: 100%;
     position: relative;
     overflow: visible;
+    color: var(--color-primary-inverse);
 }
 .inputBaseError {
     border: 1px solid var(--color-error) !important;
@@ -120,6 +126,7 @@ export default {
     border-radius: 0.5rem;
     border-color: transparent;
     transition: height 0.5s ease-in-out;
+    color: var(--color-primary-inverse);
 
     background-color: var(--color-primary-input);
 }
