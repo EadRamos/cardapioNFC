@@ -1,30 +1,26 @@
 <template>
-    <div style="width: 100%; height: auto;">
     
-    <div class="input-area">
-        
-        <input
-        v-model="value"
-        :class="{'input': true, 'inputError': error.length > 0}"
-        :type="type"
-        :placeholder="placeholder"
-        :required="require"
-        @click="error.length && (error = [])"
-        @input="returnInput(value)"/>
-        
-        <label class="input-label">{{label}}</label>
-        <span v-if="error.length > 0" class="inputMessageError">{{ error[0] }}</span>
-    </div>
-    </div>
+        <div class="areaInputBase">
+            
+            <input
+            v-model="value"
+            :class="{'inputBase': true, 'inputBaseError': error.length > 0}"
+            :type="type"
+            :placeholder="placeholder"
+            :required="require"
+            @click="error.length && (error = [])"
+            @input="returnInput(value)"/>
+            
+            <label v-if="labelVisible == false && !value || labelVisible" :class="{'inputBaseLabel': true, 'visibleFocus': !labelVisible}">{{label}}</label>
+            <i v-if="icon" :class="[icon, 'inputBaseIcon']"/>
+            <span v-if="error.length > 0" class="inputBaseMessageError">{{ error[0] }}</span>
+        </div>
+
 </template>
 <script>
-import SimpleCardMessage from '@/components/messages/SimpleCardMessage.vue';
 
 export default {
-    name: 'Input',
-    components: {
-        'simple-message': SimpleCardMessage,
-    },
+    name: 'InputBase',
     props: {
         type: {
             type: String,
@@ -49,6 +45,14 @@ export default {
         rules: {
             type: Array,
             default: []
+        },
+        icon: {
+            type: String,
+            default: null
+        },
+        labelVisible: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -82,20 +86,34 @@ export default {
 }
 </script>
 <style scoped>
-.inputMessageError {
-    position: relative;
-    top: 0.1rem;
+.inputBase:focus ~ .visibleFocus {
+    display: none !important;
+}
+.inputBaseIcon {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+
+    transform: translateY(-50%);
+    
+    font-size: 1rem;
+    opacity: 50%;
+}
+.inputBaseMessageError {
+    position: absolute;
+    left: 0;
+    top: 100%;
     color: var(--color-error);
 }
-.input-area {
+.areaInputBase {
     width: 100%;
     position: relative;
     overflow: visible;
 }
-.inputError {
+.inputBaseError {
     border: 1px solid var(--color-error) !important;
 }
-.input {
+.inputBase {
     width: 100%;
     height: 2.5rem;
     padding: 0 1rem;
@@ -105,21 +123,21 @@ export default {
 
     background-color: var(--color-primary-input);
 }
-.input:hover {
+.inputBase:hover {
     border: 1px solid var(--color-main);
 }
-.input:focus {
+.inputBase:focus {
     outline: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.input::placeholder {
+.inputBase::placeholder {
     transition: color 0.5s ease-in;
     color: transparent;
 }
-.input:focus::placeholder {
+.inputBase:focus::placeholder {
     color: var(--color-primary-inverse);
 }
-.input-label {
+.inputBaseLabel {
     position: absolute;
     top: 0.7rem;
     left: 0.5rem;
@@ -127,31 +145,12 @@ export default {
     color: var(--color-primary-inverse);
     transition: all 0.5s ease-in-out;
 }
-.input:focus ~ .input-label,
-.input:not(:placeholder-shown) ~ .input-label {
+.inputBase:focus ~ .inputBaseLabel,
+.inputBase:not(:placeholder-shown) ~ .inputBaseLabel {
     transition: all 0.5s ease-in-out;
     top: -1.2rem;
     left: 0;
     color: var(--color-primary-inverse);
 }
-@keyframes input-selection {
-    0% {
-        border-right: 2px solid var(--color-main);
-    }
-    50% {
-        border-right: 2px solid transparent;
-        border-left: 2px solid var(--color-main);
-    }
-    100% {
-        border-right: 2px solid var(--color-main);
-    }
-}
-@keyframes input-focus {
-    50% {
-        border-color: transparent;
-    }
-    100% {
-        border-color: var(--color-main);
-    }
-}
+
 </style>

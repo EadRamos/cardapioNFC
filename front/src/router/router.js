@@ -1,18 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HelloWorld from '@/components/HelloWorld.vue';
-import LoginPG from '../pages/login/LoginPG.vue';
+import LoginPG from '@/pages/login/LoginPG.vue';
+import MenuPG from '@/pages/login/menu/MenuPG.vue';
 
 const routes = [
     {
         path: '/',
-        component: LoginPG,
+        component: MenuPG,
         name: 'Home',
     },
     {
-        path: '/tag/:tag',
-        component: HelloWorld,
-        name: 'Tag',
+        path: '/login',
+        component: LoginPG,
+        name: 'Login',
     }
 ];
 

@@ -49,6 +49,7 @@
 </template>
 <script>
 import Input from '@/components/inputs/Input.vue';
+import Select from '@/components/inputs/Select.vue';
 import BaseInput from '@/components/inputs/BaseInput.vue';
 import Button from '@/components/buttons/Button.vue';
 import PopButton from '@/components/buttons/PopButton.vue';
@@ -61,7 +62,8 @@ export default {
         'base-input': BaseInput,
         'btn': Button,
         'pop-btn': PopButton,
-        'simple-message': SimpleCardMessage
+        'simple-message': SimpleCardMessage,
+        'select-login': Select,
     },
     data() {
         return {

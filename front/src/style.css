@@ -11,7 +11,9 @@ html {
   --color-error: rgb(248, 57, 57);
   --color-success: rgb(126, 212, 69);
   font-size: var(--font-size);
-  
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 * {
   font-family: "fontLight", sans-serif;
@@ -20,10 +22,26 @@ html {
   margin: 0;
   text-decoration: none;
 }
+ul {
+  list-style-type: none;
+  color: black;
+}
+li {
+  color: var(--color-primary-inverse);
+}
+a {
+  color: var(--color-primary-inverse);
+}
 
 body, #app {
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  display: flex;
+  flex-direction: column;
 }
 #app.dark {
   --color-primary: rgb(35, 35, 35);
