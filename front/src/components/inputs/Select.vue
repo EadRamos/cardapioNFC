@@ -167,7 +167,7 @@ export default {
     background-color: var(--color-primary);
     color: var(--color-primary-inverse) !important;
     opacity: 0;
-    z-index: 1000;
+    z-index: 900;
     transition: opacity 1s ease;
 }
 .optionsSelectBase::-webkit-scrollbar {
@@ -191,9 +191,10 @@ export default {
 }
 .optionsSelectBase > ul > li {
     width: 100%;
-    min-height: 2rem;
+    min-height: 2.5rem;
     padding: 0 1rem;
     line-height: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     transition: background-color 0.2s ease-in-out;
 }
 .optionsSelectBase > ul > li:hover {
@@ -206,6 +207,7 @@ export default {
     bottom: 0;
     left: 0;
     max-height: 50%;
+    min-height: 25%;
     padding-top: 2rem;
 
     border-radius:2rem 2rem 0 0;

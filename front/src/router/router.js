@@ -1,19 +1,35 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HelloWorld from '@/components/HelloWorld.vue';
 import LoginPG from '@/pages/login/LoginPG.vue';
-import MenuPG from '@/pages/login/menu/MenuPG.vue';
+import MenuPG from '@/pages/menu/MenuPG.vue';
+import MenuProdutosPG from '@/pages/menu/MenuProdutosPG.vue';
+import CartPG from '@/pages/cart/CartPG.vue';
+import Home from '@/pages/home/Home.vue';
+
+import authStore from '@/store/auth.js';
+import { storeToRefs } from "pinia";
 
 const routes = [
     {
         path: '/',
-        component: MenuPG,
+        component: Home,
         name: 'Home',
     },
     {
         path: '/cardapio',
         component: MenuPG,
         name: 'Cardapio',
+    },
+    {
+        path: '/cardapio/:categoriaProdutos',
+        component: MenuProdutosPG,
+        name: 'CardapioProdutos',
+        props: true
+    },
+    {
+        path: '/pedidos',
+        component: CartPG,
+        name: 'Cart',
     },
     {
         path: '/login',
@@ -34,7 +50,5 @@ router.beforeEach((to, from, next) => {
 
     next();
 });
-
-console.log('passou rota');
 
 export default router;

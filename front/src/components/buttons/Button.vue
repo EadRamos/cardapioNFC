@@ -15,7 +15,7 @@
         'full': type == 'full',
         'half': type == 'half'
     }">
-        <i v-if="iconSide == 'left'" :class="icon"/>
+        <i v-if="iconSide == 'left' && icon" :class="icon"/>
         <span v-if="text">{{ text }}</span>
         <i v-if="iconSide == 'right'" :class="icon"/>
     </div>
@@ -63,6 +63,7 @@ export default {
     height: 3rem;
 
     font-size: 150%;
+    text-align: center;
 
     cursor: pointer;
 }

@@ -1,6 +1,6 @@
 <template>
     <div
-    v-if="messages?.length > 0"
+    v-if="messages"
     :class="[
         mobile ? 'simpleCardMessageMobile shadow2' : 'simpleCardMessageDesktop', 'round'
     ]"
@@ -30,7 +30,7 @@ export default {
         exit: {
             type: Function,
             default: () => {},
-        }
+        },
     },
     data() {
         return {
@@ -76,7 +76,7 @@ export default {
     top: 0.5rem;
     right: 50%;
     transform: translateX(50%);
-    z-index: 999;
+    z-index: 990;
 
     font-size: 1.3rem;
 }

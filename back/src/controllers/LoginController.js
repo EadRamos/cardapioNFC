@@ -29,13 +29,35 @@ class LoginController {
             return res.status(200).json({ 
                 message: 'success',
                 token: token,
-                refreshToken: refreshToken
+                refreshToken: refreshToken,
+                user: user,
             });
 
         } catch (error) {
-            return res.status(500).json({ message: 'Erro interno ao efetuar login', error: error});
+            return res.status(400).json({ message: 'Erro interno ao efetuar login', error: error});
         }
     };
+
+    static async cadastro(req, res) {
+        const { login, name, type, password } = req.body;
+
+        try {
+            const user = await User.findOne({ where: { login }});
+            if(user) {
+                return res.status(400).json({message: 'O usuário já existe.'});
+            }
+            const response = await User.create({
+                name: name,
+                type: type,
+                password: bcrypt.hashSync(password, 10),
+                login: login
+            });
+
+            return res.status(200).json({item:response});
+        } catch (error) {
+            return res.status(200).json({message: 'Houve um erro interno ao cadastrar.'});
+        }
+    }
 
     static async loginClient(req, res) {
         try {

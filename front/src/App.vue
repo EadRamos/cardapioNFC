@@ -4,6 +4,7 @@
       <component :is="Component" />
     </transition>
   </router-view>
+  <menu-mobile/>
 </template>
 <script>
 export default {

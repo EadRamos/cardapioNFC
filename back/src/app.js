@@ -12,7 +12,9 @@ const ENVIRONMENT = process.env.ENVIRONMENT || 'development';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+}));
 
 app.use(express.json());
 
@@ -28,4 +30,4 @@ sequelize.authenticate()
     console.error('Connect error: ', err);
 });
 
-app.listen(PORT, () => console.log(`serve rodando na porta ${PORT} em modo ${ENVIRONMENT}`));
+app.listen(PORT,'0.0.0.0', () => console.log(`serve rodando na porta ${PORT} em modo ${ENVIRONMENT}`));

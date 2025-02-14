@@ -1,5 +1,5 @@
 <template>
-    <div class="buttonSelectBase round center" :style="{'background-color: var(--color-main)': value}">
+    <div class="buttonSelectBase round center clicked" :style="value ? 'background-image: var(--gradient-primary)': ''">
         <span v-if="label">{{ label }}</span>
         <i v-if="icon" :class="[icon]"/>
     </div>

@@ -12,6 +12,10 @@ User.init({
         autoIncrement: true,
         primaryKey: true,
     },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     login: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -2,7 +2,7 @@
     <div id="menuMobile">
         <ul class="areaMenuMobile">
             <li v-for="item in itensMenu" class="areaButtonMenuMobile">
-                <router-link :to="item.url" class="buttonMenuMobile" >
+                <router-link :to="item.url" class="buttonMenuMobile">
                  
                     <div class="buttonMenuMobileIcon center" :style="buttonSelect(item.url)">
                         <i :class="item.icon" style="font-size: 2rem;"/>
@@ -67,7 +67,7 @@ export default {
 <style>
 #menuMobile {
     width: 100%;
-    height: 5rem;
+    height: 4.5rem;
     
     background-color: var(--color-primary);
 }
@@ -100,6 +100,7 @@ export default {
 }
 .areaMenuMobile {
     display: flex;
+    margin-top: 0.2rem;
     justify-content: space-around;
     align-items: center;
 

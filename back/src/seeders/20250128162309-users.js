@@ -11,24 +11,27 @@ module.exports = {
       {
         login: 'admin',
         password: password,
-        type: 'admin'
+        type: 'admin',
+        name: 'Administrador'
       },
       {
         login: 'chef',
         password: password,
-        type: 'chef'
+        type: 'chef',
+        name: 'Cozinheiro'
       },
       {
         login: 'waiter1',
         password: password,
-        type: 'waiter'
+        type: 'waiter',
+        name: 'Garçom1'
       }
     ])
   },
 
   async down (queryInterface, Sequelize) {
     
-    await queryInterface.bulkDelete('People', null, {});
+    await queryInterface.bulkDelete('users', null, {});
      
   }
 };

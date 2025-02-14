@@ -2,8 +2,8 @@ import axios from 'axios';
 import authStore from '@/store/auth.js';
 
 const api = axios.create({
-    baseURL: import.meta.env.BACK_API || 'http://localhost:8001/',
-    timeout: 5000,
+    baseURL: import.meta.env.VITE_BACK_API || '/api',
+    timeout: 8000,
 });
 
 api.interceptors.request.use(( header ) => {
@@ -15,7 +15,7 @@ api.interceptors.request.use(( header ) => {
     return header;
 }, error => {
    
-    return Promise.rejact(error);
+    return Promise.reject(error);
 });
 
 api.interceptors.response.use(
@@ -28,7 +28,7 @@ api.interceptors.response.use(
             //window.location.href = '/';
         }
 
-        return error;
+        return  Promise.reject(error);
     }
 );
 

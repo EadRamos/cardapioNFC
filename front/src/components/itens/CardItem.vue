@@ -1,11 +1,11 @@
 <template>
-    <div class="cardItemMenu round">
-        <div class="imageCardItemMenu round" :style="[`background-image: url(${image})`]">
-            <i class="fa-solid fa-circle-plus iconCardItemMenu"/>
+    <div class="cardItemMenu round" v-if="product">
+        <div class="imageCardItemMenu round" :style="[`background-image: url(${product.image})`]">
+            <i class="fa-solid fa-cart-shopping iconCardItemMenu"/>
         </div>
         <div class="descriptionCardItemMenu">
-            <p class="priceCardItemMenu">R$ {{ price }}</p>
-            <p class="titleCardItemMenu">{{ title }}</p>
+            <p class="priceCardItemMenu">R$ {{ product.price }}</p>
+            <p class="titleCardItemMenu">{{ product.title }}</p>
         </div>
     </div>
 </template>
@@ -13,17 +13,9 @@
 export default {
     name: 'CardItem',
     props: {
-        price: {
-            type: String,
-            default: '00,00'
-        },
-        title: {
-            type: String,
-            default: ''
-        },
-        image: {
-            type: String,
-            default: 'https://www.cnnbrasil.com.br/viagemegastronomia/wp-content/uploads/sites/5/2022/05/mafe-estudio-LV2p9Utbkbw-unsplash.jpg'
+        product: {
+            type: Object,
+            default: null,
         },
         add: {
             type: Function,
@@ -34,10 +26,10 @@ export default {
 </script>
 <style>
 .cardItemMenu {
-    width: 10rem;
+    width: 8rem;
     height: fit-content;
-    flex: 10rem 0 0;
-    aspect-ratio: 1/1.6;
+    flex: 8rem 0 0;
+    aspect-ratio: 1/1.7;
     overflow: hidden;
 
     box-shadow: 0.2rem 0.3rem 0.5rem 0 rgba(0, 0, 0, 0.05);
@@ -57,7 +49,7 @@ export default {
 .titleCardItemMenu {
     width: 100%;
     padding: 0.2rem 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
 
     display: -webkit-box; /* Habilita o modelo de caixa flexível */
     -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
@@ -67,13 +59,15 @@ export default {
     white-space: normal;
 }
 .iconCardItemMenu {
+    aspect-ratio: 1/1;
+    height: fit-content;
     position: absolute;
     top: 0.5rem; 
     right: 0.5rem;  
-
-    font-size: 1.5rem;
-    
-    color:var(--color-main); 
+    padding: 0.2rem;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    color: white; 
 }
 .descriptionCardItemMenu {
     width: 100%;
@@ -82,7 +76,7 @@ export default {
     color: var(--color-primary-inverse);
 }
 .priceCardItemMenu {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 </style>

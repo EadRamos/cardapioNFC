@@ -48,7 +48,7 @@ backend (dentro da pasta back):
     - `npm run start // inicializa em modo produção`
     - `npm run startdev // inicializa em modo desenvolvimmento`
     - `npm run deploy // executa o deploy da apliacação rodando as migration e iniciando`
-    - `npx sequelize-cli migrations:generate --name create-<name> // cria uma migração`
+    - `npx sequelize-cli migration:generate --name create-<name> // cria uma migração`
     - `npx sequelize-cli db:migrate // executa as migrações`
     - `npx sequelize-cli db:migrate:undo:all // desfazer migrações`
     - `npx sequelize-cli db:seed:all // executa os seeds`
