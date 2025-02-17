@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "beaming-octagon-450922-r9",
+  "private_key_id": "d5e9d1cce68f451e3f42a80719e918fd1ae06c8c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDU+YU2rD641Q3k\n0ztzOAlnCNEFst93w459uVAnyCgNnwTXooEKafomNVlMSjjNkRKZ96uS2o085DCj\nSN0GHuuVa9DRbr5MTr9XkMmN2150F7Rkm7vHp30l3pHycJIIWmH1/fJvtWA20hEN\n1tiJeEz2TSoZpl2LEDqaXEDD003awYBIseevP34F9YSuOUSvWOdHJNv9n0b6nNQd\nwRhaca++GI6hEpmtQzT9phpInh1Y/5EUKL3EkhOD2tq9fogpmREoGGwk0j4hNys4\nYUN/nlnrvlRwwhWt+LATyg+v5tysy8fWHqlMyQy3SIihWehayA5mepNwm7ePVQ8f\n3YBaHroLAgMBAAECggEAHJm5owL0lVu/NuiLBkkTMiwD7fD8g5fWbdnSAtWlU1b0\njoS7MYvT1Qe7Czy4bhq6VcTl3J3O88ttILBrRiQm3PUSoN1vXs4AciD2gD9iatK4\nHf6v8/rxGoHONbGaWtbQavmEci34UsRZF/OvNp7aLwVjzvgBfehbBlm3NNUOkn7F\nGzRl+TxQsLB/WqQsvjdaKmiFgyXxZmbunG6yWQtt6dBpBTvvupQumO/a5UKaCk5T\no4ODCC31cgNvtaAQRBQgPxBkzdL740XwyFXkz7ZrAOCXwyf5IuDRbuViDfvuE+zU\nvzH1Ix+DEjVPSZ+NSp+uhcFsP3P6wnY/N9SLf4lXiQKBgQDyEyY4oRxkO5w6ccCy\nj+fLM+Fci+IkxFzBGa+TLfFdlznBY98z3N0Xq2kt/tdNj17QJnz2Z7DUpgFXSsI8\nMrrAm0C5bfNG66incxJvoqckQSKstB7A+en3tFqoCHpKrIW6NhIWNiJmioOOcmJU\np8pCAZ9hUsdeFduV7iz2umxR9wKBgQDhOdX/WQANZiLz/Mhns6PxldFjtE6dJ7nV\nqNc8K+Wa7ARFd+4Nzx8iumM1CG5vToS+bndvLZzfHGuoW8rBpg05N2TG3Z8vVz7B\nQP9xeKLGzhPbDgD0krl0k/GSx72qLVU/GjnEXEwBqd04z59ixMs1+CDcSFlU8/3F\n7Mm3yJHTjQKBgQCOfCUAKhybBtdDM1d4AuotmiDpJ1D50TbDVkoY+G7cZrnREeb8\nEOF2ICetshWqilwFatIc+xWDZR7e8Zr4ceeonPlw673JHcbMoRfV68gzt78gJnj/\nn1pOubKuuya4M2oXG+JzfnOrJZafzsYADC8pwOi+EUpWH8l7K5D9vOcrKwKBgQDV\nY+PCXAO1rjidrLn/ru88vHK4IaR+N55VtfO/eePABbACVZ/Bi6T3VVsbaxKe+OjC\nOI2GU9QWe6nwyI9xLC/JLxeXZ3Ej/Ghj135udxrae3PKjxkOoFl//4/ZPtAPhYYI\nFIP47G3DAbqs0eI0RTo3txEDRLUGzWl6dl+kdi7cHQKBgFa09VdVzn8wIhEuauvp\nNkwk5uNg7iuJZhKU+bJxSPyNsfxsDCcM8ceYH9BeNMrniL1E87OU52BfbKT82TcW\nSDqxUeMMMNVcLSZNmxRnhhNeDOkA5i+KY6Yy8q8jgb/zVd7rmj3Ytme/le/3Ikk+\nE1fS4OWm1U+BXUFrzReMX8qq\n-----END PRIVATE KEY-----\n",
+  "client_email": "cardapionfc@beaming-octagon-450922-r9.iam.gserviceaccount.com",
+  "client_id": "109824346065869256825",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cardapionfc%40beaming-octagon-450922-r9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

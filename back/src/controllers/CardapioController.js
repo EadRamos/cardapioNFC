@@ -1,6 +1,9 @@
 const Category = require('../models/Category');
 const Product = require('../models/Product');
 const models = require('../models/index.js');
+
+const GoogleDriveService = require('../services/GoogleDriveServices.js');
+const driveService = new GoogleDriveService();
 class CardapioController {
     static async index(req, res) {
         try {
@@ -60,6 +63,22 @@ class CardapioController {
             return res.status(400).json({error: 'Necessário passar o titulo.'});
         } catch (error) {
             res.status(400).json({error: error});
+        }
+    }
+
+    static async upload(req, res) {
+        try {
+            if(!req.file) return res.status(400).json({error: 'Imagem é obrigátorio.'});
+
+            const fileUrl = await driveService.uploadFile(
+                req.file.originalname,
+                req.file.buffer,
+                req.file.mimetype
+            );
+
+            return res.status(200).json({message: 'sucesso', url: fileUrl});
+        } catch (error) {
+            return res.status(400).json({error: error.message});
         }
     }
 };

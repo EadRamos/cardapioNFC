@@ -39,6 +39,10 @@
                 <card-item class="cardItemPromotion clicked" v-for="(product, key) in itens" :product="product" @click="openProduct(product)"/>
             </div>
         </div>
+        <div>
+            <input type="file" name="image" @change="onFileChange">
+            <p @click="upload">enviar</p>
+        </div>
         <prop-item-mobile v-if="propVisible" :product="productSelect" :visible="propVisible" :setVisible="(value) => propVisible = value"/>
     </div>
 </template>
@@ -63,9 +67,32 @@ export default {
             msgErro: null,
             propVisible: false,
             productSelect: null,
+            imageFile: null
         }
     },
     methods: {
+        onFileChange(event) {
+            this.imageFile = event.target.files[0];
+        },
+        async upload() {
+            if(!this.imageFile) {
+                console.log('imagem vaiza');
+                return;
+            }
+            const formData = new FormData();
+            formData.append('image', this.imageFile);
+
+            try {
+                const response = await this.axios.post('/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                console.log(response.data);
+            } catch (error) {
+                console.error('error: ', error);
+            }
+        },  
         async index(){
             try {
                 const response = await this.axios.get('/');

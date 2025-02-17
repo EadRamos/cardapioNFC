@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+
+const upload = multer({storage: multer.memoryStorage()});
 
 // CONTROLLERS
 const UserController = require('../controllers/UserController');
@@ -18,6 +21,9 @@ router.get('/user/:id', UserController.getUser);
 router.post('/login', LoginController.login);
 router.post('/login/client', LoginController.loginClient);
 router.post('/cadastro', LoginMiddleware, LoginController.cadastro);
+
+
+router.post('/upload', upload.single('image'), CardapioController.upload);
 
 // CARDAPIO
 router.get('/cardapio', CardapioController.index);
