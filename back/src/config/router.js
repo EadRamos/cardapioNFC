@@ -8,6 +8,7 @@ const upload = multer({storage: multer.memoryStorage()});
 const UserController = require('../controllers/UserController');
 const LoginController = require('../controllers/LoginController');
 const CardapioController = require('../controllers/CardapioController');
+const PedidosController = require('../controllers/PedidosController');
 
 // MIDDLEWARES
 const { LoginMiddleware, LoginClientMiddleware} = require('../middlewares/LoginMiddleware');
@@ -29,6 +30,8 @@ router.post('/upload', upload.single('image'), CardapioController.upload);
 router.get('/cardapio', CardapioController.index);
 router.get('/cardapio/:title', CardapioController.getProductionCategory);
 
+// PEDIDOS
+router.get('/pedidos/:table', /*LoginClientMiddleware,*/ PedidosController.getPedidos);
 router.get('/protect', LoginMiddleware, (req, res) => { res.json({ message: 'tudo ok'})});
 
 

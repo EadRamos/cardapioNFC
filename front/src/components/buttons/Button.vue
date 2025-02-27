@@ -66,9 +66,15 @@ export default {
     text-align: center;
 
     cursor: pointer;
+    transition: filter 0.2s ease;
 }
 .btn:hover {
-    border: 1px solid rgb(82, 82, 82, 0.3);
+    filter: brightness(120%);
+}
+.btn:active {
+    filter: invert(100%);
+    transform: scale(102%);
+    transition: filter 0.5s ease;
 }
 .btn.mobile {
     font-size: 100%;

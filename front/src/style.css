@@ -49,7 +49,11 @@ body, #app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
+  background-color: var(--color-secundary);
+
+  color: var(--color-primary-inverse);
 }
 #app.dark {
   --color-primary: rgb(35, 35, 35);
@@ -139,5 +143,16 @@ body, #app {
 @media screen and (orientation: landscape) {
   html {
     font-size: 62.5% !important;
+  }
+}
+
+@keyframes cardAparecer {
+  from {
+      transform: translateY(-4rem);
+      opacity: 0%;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 100%;
   }
 }

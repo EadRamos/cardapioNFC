@@ -1,12 +1,12 @@
 <template>
     <template v-if="true">
-        <div id="areaCartPGMobile">
-            <div class="cartPGMobile">
-                <div class="containerCartPGMobile">
-                    <div class="titleCategoryCartMobile round">
+        <div id="areaCartPG" :class="{'mobile': mobile}">
+            <div class="cartPG" :class="{'mobile': mobile}">
+                <div class="containerCartPG" :class="{'mobile': mobile}">
+                    <div class="titleCategoryCart round">
                         <h2>Carrinho</h2>
                     </div>
-                    <div v-if="cart.orders.length" class="listItensCartMobile round">
+                    <div v-if="cart.orders.length" class="listItensCart round" :class="{'mobile': mobile}">
                         <div style="border-radius: 1rem; width: 1.8rem; aspect-ratio: 1/1; background-color: var(--color-secundary); position: absolute; top: -0.9rem; left: -0.9rem"></div>
                         <div style="border-radius: 1rem; width: 1.8rem; aspect-ratio: 1/1; background-color: var(--color-secundary); position: absolute; top: -0.9rem; right: -0.9rem"></div>
 
@@ -15,11 +15,11 @@
                             <div style="border-radius: 1rem; width: 1.8rem; aspect-ratio: 1/1; background-color: var(--color-secundary); position: absolute; bottom: -0.9rem; left: -0.9rem"></div>
                             <div style="border-radius: 1rem; width: 1.8rem; aspect-ratio: 1/1; background-color: var(--color-secundary); position: absolute; bottom: -0.9rem; right: -0.9rem"></div>
                     </div>
-                    <div v-else class="listItensCartMobile round">Carrinho vázio</div>
+                    <div v-else class="listItensCart round" :class="{'mobile': mobile}">Carrinho vázio</div>
     
-                    <div class="totalItensCartMobile round">Total: R$ {{ cart.totalPrice.toFixed(2) }}</div>
+                    <div class="totalItensCart round" :class="{'mobile': mobile}">Total: R$ {{ cart.totalPrice.toFixed(2) }}</div>
                 </div>
-                <div class="actionCartPGMobile">
+                <div class="actionCartPG" :class="{'mobile': mobile}">
                     <btn
                     type="minimal"
                     text="Cancelar"
@@ -72,15 +72,23 @@ export default {
         'card-item': CardItemOrders
     },
     methods: {
-
+        async getPedidos() {
+            try {
+                const response = await this.axios.get(`/pedidos/${1}`);
+                console.log(response);
+                console.log(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     },
     mounted() {
-
+        this.getPedidos();
     }
 }
 </script>
 <style>
-#areaCartPGMobile {
+#areaCartPG {
     width: 100%;
     height: calc(100% - 4.2rem);
     min-height: calc(100vh - 4.2rem);
@@ -91,7 +99,12 @@ export default {
     color: var(--color-primary-inverse);
     background-color: var(--color-secundary);
 }
-.containerCartPGMobile {
+#areaCartPG:not(.mobile) {
+    min-width: 500px;
+    max-width: 1000px;
+    padding: 1rem;
+}
+.containerCartPG {
     width: 95%;
     height: fit-content;
     display: flex;
@@ -101,7 +114,7 @@ export default {
     border-radius: 2rem;
     /*background-image: var(--gradient-primary);*/
 }
-.cartPGMobile {
+.cartPG {
     width: 100%;
     padding: 1rem 0;
     display: flex;
@@ -111,7 +124,7 @@ export default {
     color: black;
 
 }
-.titleCategoryCartMobile {
+.titleCategoryCart {
     width: 100%;
     height: 4rem;
     padding: 1rem 1rem;
@@ -122,7 +135,7 @@ export default {
 
     font-size: 1rem;
 }
-.listItensCartMobile {
+.listItensCart {
     width: 100%;
     height: fit-content;
     position: relative;
@@ -135,7 +148,7 @@ export default {
     border: 1px dashed rgba(0, 0, 0, 0.2);
     background-image: var(--gradient-primary);
 }
-.totalItensCartMobile {
+.totalItensCart {
     width: 100%;
     padding: 1rem;
     text-align: right;
@@ -143,7 +156,7 @@ export default {
     font-weight: bold;
     background-image: var(--gradient-primary);
 }
-.actionCartPGMobile {
+.actionCartPG {
     width: 70%;
     height: fit-content;
     padding: 1rem 0rem;

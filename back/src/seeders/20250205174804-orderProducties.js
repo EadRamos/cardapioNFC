@@ -8,7 +8,8 @@ module.exports = {
     await queryInterface.bulkInsert('orderProducties', [
       {
         order_id: 1,
-        product_id: 1
+        product_id: 1,
+        amount: 1,
       },
       {
         order_id: 1,
@@ -17,7 +18,8 @@ module.exports = {
       },
       {
         order_id: 2,
-        product_id: 3
+        product_id: 3,
+        amount: 1,
       },
       {
         order_id: 4,
@@ -26,15 +28,18 @@ module.exports = {
       },
       {
         order_id:3,
-        product_id: 1
+        product_id: 1,
+        amount: 1,
       },
       {
         order_id: 5,
-        product_id: 2
+        product_id: 2,
+        amount: 1,
       },
       {
         order_id: 5,
-        product_id: 1
+        product_id: 1,
+        amount: 1,
       }
     ]);
 

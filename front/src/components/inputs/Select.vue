@@ -2,11 +2,11 @@
     <div class="selectBase" :style="[sizeMinimal(), selectPopupMobile()]">
         <div ref="refSelectBase" @click="clickSelectF" class="buttonSelectBase round center">
 
-            <label v-if="labelCanVisible()" :class="{'labelSelectBase': true, 'labelSelectBaseFocus': value != ''}">
+            <label v-if="labelCanVisible()" class="labelSelectBase" :class="{'labelSelectBaseFocus': value != '', 'labelSelectBaseMinimal': minimal == false}">
                 {{ label }}
             </label>
 
-            <span v-if="value" style="line-height: 2.5rem;">
+            <span v-if="value" :class="{'valueSelectBaseMinimal': minimal == false}" style="line-height: 2.5rem;">
                 {{ primaryElement(value) }}
             </span>
 
@@ -144,12 +144,21 @@ export default {
     color: var(--color-primary-inverse);
     transition: all 0.5s ease-in-out;
 }
+
+.labelSelectBaseMinimal {
+    left: 0.5rem;
+    transform: translateY(-50%) translateX(0%);
+}
 .labelSelectBaseFocus {
     transition: all 0.5s ease-in-out;
-    top: 0%;
+    top: 0;
     left: 0;
-    transform: translateY(-100%);
+    transform: translateY(calc(-100% - 0.4rem));
     color: var(--color-primary-inverse);
+}
+.valueSelectBaseMinimal {
+    position: absolute;
+    left: 0.5rem;
 }
 .optionsSelectBase {
     display: none;

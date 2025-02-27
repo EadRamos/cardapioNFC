@@ -1,34 +1,35 @@
 <template>
-    <div id="propItemMobile" v-if="visible">
-        <div class="imgPropItem" :style="`background-image: url(${product.image})`">
-            <pop-btn
+    <div id="propItem" v-if="visible">
+        <div class="areaPropItem round shadow2">
+            <div class="imgPropItem" :style="`background-image: url(${product.image})`">
+                <pop-btn
                 :icon="'fa-solid fa-angle-left'"
                 @click="setVisible(false)"/>
+            </div>
+
+            <div class="informationPropItem">
+                <h1 class="titlePropItem">{{ product.title }}</h1>
+                <p class="descriptionPropItem">{{ product.description }}</p>
+                <h2 class="pricePropItem">R$ {{ product.price }}</h2>
+            </div>
+
+            <div class="actionPropItem">
+
+                <input-level :value="amount" :returnValue="(value) => amount = value"/>
+
+                <btn
+                class="clicked"
+                type="full"
+                :text="`Adicionar - R$ ${(amount * product.price).toFixed(2)}`"
+                color="gradientPrimary"
+                :rounder="true"
+                style="margin-left: 1rem; font-weight: bold;"
+                @click="addProduct()"/>
+            </div>
+            <simple-message v-if="messageAviso.length > 0" :message="messageAviso" :returnMessage="(value) => messageAviso = value" time="4000"/>
         </div>
-
-        <div class="informationPropItem">
-            <h1 class="titlePropItem">{{ product.title }}</h1>
-            <p class="descriptionPropItem">{{ product.description }}</p>
-            <h2 class="pricePropItem">R$ {{ product.price }}</h2>
-        </div>
-
-        <div class="actionPropItem">
-
-            <input-level :value="amount" :returnValue="(value) => amount = value"/>
-
-            <btn
-            class="clicked"
-            type="full"
-            :text="`Adicionar - R$ ${(amount * product.price).toFixed(2)}`"
-            color="gradientPrimary"
-            :rounder="true"
-            style="margin-left: 1rem; font-weight: bold;"
-            @click="addProduct()"/>
-        </div>
-        <simple-message v-if="messageAviso.length > 0" :message="messageAviso" :returnMessage="(value) => messageAviso = value" time="4000"/>
     </div>
 </template>
-
 <script>
 import Button from '@/components/buttons/Button.vue';
 import PopButton from '@/components/buttons/PopButton.vue';
@@ -50,7 +51,6 @@ export default {
         return {
             amount: 1,
             cart: null,
-            popStateListener: null,
             messageAviso: '',
         }
     },
@@ -81,47 +81,39 @@ export default {
         }
     },
     mounted() {
-        window.history.pushState(null, null, window.location.href);
-
-        // Define o evento de 'popstate'
-        this.popStateListener = () => {
-            // Lógica de prevenção de navegação
-            this.setVisible(false);
-            
-            // Opcional: Atualiza o estado no histórico para bloquear o back
-            window.history.pushState(null, null, window.location.href);
-            
-            // Remover o event listener após disparar uma vez
-            window.removeEventListener('popstate', this.popStateListener);
-        };
-
-        window.addEventListener('popstate', this.popStateListener);
 
         this.cart = cartStore();
     },
-    beforeDestroy() {
-        if (this.popStateListener) {
-        window.removeEventListener('popstate', this.popStateListener);
-        }
-    }
 }
 </script>
 <style scoped>
-#propItemMobile {
+#propItem {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: calc(100% - 4.5rem);
-    position: fixed;
+    height: 100%;
+    position: absolute;
     top: 0;
     left: 0;
+
     z-index: 950;
-    background-color: var(--color-primary);
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.areaPropItem {
+    width: 60%;
+    min-width: 350px;
+    max-width: 500px;
+    height: fit-content;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-secundary);
 }
 .imgPropItem {
     width: 100%;
     aspect-ratio: 1/1;
-    max-height: 40%;
+    max-height: 350px;
     padding: 1rem;
     background-color: var(--color-primary-inverse);
     background-size: cover;
@@ -130,7 +122,8 @@ export default {
 }
 .informationPropItem {
     width: 100%;
-    height: 100%;
+    height: fit-content;
+    max-height: 400px;
 
     margin-top: -2rem;
 

@@ -1,7 +1,7 @@
 <template>
     <div id="menuPG" class="full">
         <template v-if="true && !loading">
-            <div style=" width: 100%;">
+            <div :class="{'menuActionMenuPG': !mobile}" style=" width: 100%;">
                 <input-pesquisa
                 label="Pesquisa"
                 :labelVisible="false"
@@ -9,7 +9,7 @@
                 style="margin: 0.5rem; width: calc(100% - 1rem);"
                 :returnInput="(value) => pesquisa = value"/>
 
-                <div class="menuPGFilter">
+                <div class="menuPGFilter" :class="{'mobile': mobile}">
                     <button-select class="filterMenuPG" label="Menor Preço" @click="filterMenorValor()" :value="menorPreco" />
                     <button-select class="filterMenuPG" label="Maior Preço" @click="filterMaiorValor()" :value="maiorPreco"/>
                     <select-cardapio
@@ -21,20 +21,39 @@
                     :minimal="false"/>
                 </div>
             </div>
-            <div class="listItensMenuPGMobile">
+            <div :class="[mobile ? 'listItensMenuPGMobile' : 'listItensMenuPG']">
                 <div v-if="!msgError" class="categoryListItensMenuPGMobile" v-for="(item, key) in filtro" v-show="item.products.length">
-                    <div class="titleCategoryList">
+
+                    <div v-if="mobile" class="titleCategoryList">
                         <h1>{{item.title}}</h1>
                         <i class="fa-solid fa-angles-right clicked" @click="$router.push(`/cardapio/${item.title}`)"/>
                     </div>
-                    <div class="scrollItensMenuMobile">
-                        <card-item-menu class="clicked" v-for="(product, keyS) in item.products" :product="product" @click="openProduct(product)"/>
+
+                    <div v-else class="titleCategoryList" style="cursor: pointer" @click="autMenuEspandido(item.title)">
+                        <div class="clicked round" @click.stop="$router.push(`/cardapio/${item.title}`)" style="width: fit-content; height: fit-content; padding: 0.5rem 1rem; background-image: var(--gradient-primary);">
+                            <h1>{{item.title}}</h1>
+                        </div>
+                        <i class="fa-solid fa-angles-right"
+                        :style="[checkMenuEspandido(item.title) ? 'transform: rotate(90deg)' : 'transform: rotate(-90deg)']"
+                        />
+                    </div>
+                    
+                    <div v-if="mobile" class="scrollItensMenuMobile">
+                        <card-item-menu class="itemMenuPG clicked" v-for="(product, keyS) in item.products" :product="product" :add="(prod) => addProduct(prod)" @click="openProduct(product)"/>
+                    </div>
+
+                    <div v-else class="scrollItensMenu" :style="{display: checkMenuEspandido(item.title)? 'grid' : 'none'}">
+                        <card-item-menu class="itemMenuPG clicked" v-for="(product, keyS) in item.products" :product="product" :add="(prod) => addProduct(prod)" @click="openProduct(product)"/>
                     </div>
                 </div>
                 <div v-else style="display: flex; justify-content: center; align-items: center; height: 100%">{{ msgError }}</div>
             </div>
            <!-- <menu-mobile/>-->
-            <prop-item-mobile v-if="propVisible" :product="productSelect" :visible="propVisible" :setVisible="(value) => propVisible = value"/>
+            <prop-item-mobile v-if="propVisible && mobile" :product="productSelect" :visible="propVisible" :setVisible="(value) => propVisible = value"/>
+
+            <prop-item v-if="propVisible && !mobile" :product="productSelect" :visible="propVisible" :setVisible="(value) => propVisible = value"/>
+
+            <simple-message v-if="messageAviso.length > 0" :message="messageAviso" :returnMessage="(value) => messageAviso = value" time="4000"/>
         </template>
         <template v-else>
             <div style=" width: 100%;">
@@ -87,7 +106,10 @@ import Select from '@/components/inputs/Select.vue';
 import CardItem from '@/components/itens/CardItem.vue';
 import MenuMobile from '@/components/manus/MenuMobile.vue';
 import PropItemMobile from '@/components/itens/PropItemMobile.vue';
+import PropItem from '@/components/itens/PropItem.vue';
+import SimpleSucessMessageMobile from '@/components/messages/SimpleSucessMessageMobile.vue';
 
+import cartStore from '@/store/cart.js';
 
 export default {
     name: 'MenuPG',
@@ -98,10 +120,14 @@ export default {
         'card-item-menu': CardItem,
         'menu-mobile': MenuMobile,
         'prop-item-mobile': PropItemMobile,
+        'prop-item': PropItem,
+        'simple-message': SimpleSucessMessageMobile,
 
     },
     data() {
+        const cart = cartStore();
         return {
+            cart: cart,
             itens: [
             ],
             categoria: '',
@@ -114,6 +140,8 @@ export default {
             productSelect: null,
             msgError: null,
             loading: true,
+            messageAviso: '',
+            menuEspandido: []
         }
     },
     computed: {
@@ -190,6 +218,7 @@ export default {
                 if(itens?.length > 0){
                     this.itens = itens;
                     this.categorias = this.itens.map((item) => item.title);
+                    this.menuEspandido = this.categorias.map((item) => {return {title: item, value: false}});
                 } else {
                     this.msgError = 'Houve um problema ao buscar os produtos.';
                 }
@@ -205,6 +234,25 @@ export default {
             console.log(product);
             this.productSelect = product;
             this.propVisible = true;
+        },
+        checkMenuEspandido(title){
+            const item = this.menuEspandido.find(i => i.title === title);
+            return item ? item.value : false;
+        },
+        autMenuEspandido(title){
+            for(const item in this.menuEspandido){
+                
+                if(this.menuEspandido[item].title == title){
+                    this.menuEspandido[item].value = !this.menuEspandido[item].value;
+                    console.log(this.menuEspandido[item]);
+                    break;
+                }
+            }
+        },
+        addProduct(product){
+
+            this.cart.addProduct(product);
+            this.messageAviso = `O item ( ${product.title} ) foi adicionado ao carrinho.`;
         }
     },
     mounted() {
@@ -215,18 +263,15 @@ export default {
     }
 }
 </script>
-<style>
+<style >
 .sumir {
     display: none;
-    
-}
-#menuMobile {
-    position: fixed;
-    bottom: 0;
 }
 #menuPG {
     display: flex;
+    width: 100%;
     flex-direction: column;
+    align-items: center;
     height:100%;
     min-height: 100vh;
 
@@ -246,16 +291,19 @@ export default {
     align-items: start;
     justify-content: space-around;
 
-    overflow-x: auto;
+    overflow-x: scroll;
     scrollbar-width: none;
 
     border: 0px solid rgba(0, 0, 0, 0.1);
     border-top-width: 1px;
 }
+.menuPGFilter > .mobile {
+    overflow-x: scroll;
+}
 .menuPGFilter::-webkit-scrollbar {
     display: none;
 }
-.listItensMenuPGMobile {
+.listItensMenuPGMobile, .listItensMenuPG {
     width: 100%;
     height: 100%;
     display: flex;
@@ -264,6 +312,16 @@ export default {
     margin-bottom: 5rem;
 
     color: var(--color-primary-inverse);
+}
+.listItensMenuPG {
+    min-width: 500px;
+    max-width: 1000px;
+    
+}
+.menuActionMenuPG {
+    min-width: 500px;
+    max-width: 1000px;
+    padding: 1rem;
 }
 .scrollItensMenuMobile {
     width: 100%;
@@ -275,6 +333,19 @@ export default {
  
     gap: 0.2rem;
 }
+.scrollItensMenu {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    overflow: hidden;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+.scrollItensMenu .itemMenuPG {
+    margin: 0 0.5rem;
+    width: 100%;
+}
 .scrollItensMenuMobile::-webkit-scrollbar {
     display: none;
 }
@@ -283,6 +354,7 @@ export default {
     width: 100%;
     height: fit-content;
     margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.25);
 }
 .categoryListItensMenuPGMobile .titleCategoryList {
     display: flex;

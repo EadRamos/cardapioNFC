@@ -71,6 +71,8 @@ export default {
     top: 1rem;
     left: 50%;
     transform: translateX(-50%);
+
+    font-size: 1.2rem;
     
 }
 .messageAvisoMobile.information {

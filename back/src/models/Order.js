@@ -43,6 +43,10 @@ Order.init({
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
+    },
+    status: {
+        type: Sequelize.ENUM,
+        values: ['Espera', 'Preparando', 'Concluído']
     }
 }, {
     sequelize,

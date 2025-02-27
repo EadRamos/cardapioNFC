@@ -19,7 +19,6 @@ class CardapioController {
 
             return res.status(200).json({itens: categoriesAndProductions});
         } catch (error) {
-            console.log(error.name);
             return res.status(400).json({error: error});
         }
     }

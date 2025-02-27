@@ -22,6 +22,7 @@
             :class="['full', 'colum','center']"
             :style="{gap: '2rem', padding: '2rem'}">
                 <input-login
+                v-if="isCadastre"
                 :placeholder="'Digite o nome...'"
                 :required="true"
                 :label="'Nome'"
@@ -52,6 +53,7 @@
                 :returnInput="(v) => senha = v"/>
 
                 <input-login
+                v-if="isCadastre"
                 :placeholder="'Confirme a senha...'"
                 :required="true"
                 :label="'Confirmar senha'"
@@ -61,13 +63,16 @@
                 ]"/>
 
                 <select-login
+                v-if="isCadastre"
                 label="Tipo de usuário"
+                :minimal="false"
                 :values="['chef', 'waiter', 'admin']"
                 :valueSelect="(v) => tipo = v"/>
+
                 <simple-message v-if="error.length" :messages="error" :exit="() => error = []"/>
 
                 <btn
-                @click="ifCadastre ? cadastro() : loginPush()"
+                @click="isCadastre ? loginPush() : cadastro()"
                 :type="mobile ? 'full' : 'half'"
                 text="Confirmar"
                 :icon="'fa-solid fa-right-to-bracket fa-flip'"
@@ -75,11 +80,10 @@
                 style="align-self: end;"/>
 
                 <btn
-                v-if="auth.user?.type == 'admin'"
+                
                 @click="isCadastre = !isCadastre"
                 :type="mobile ? 'full' : 'half'"
                 :text="isCadastre ? 'Login' : 'Cadastrar'"
-                :icon="'fa-solid fa-right-to-bracket fa-flip'"
                 :color="'gradientPrimary'"
                 style="align-self: end;"/>
             </base-input>

@@ -1,18 +1,18 @@
 <template>
-    <div id="menuMobile">
-        <ul class="areaMenuMobile">
-            <li v-for="item in itensMenu" class="areaButtonMenuMobile">
-                <router-link :to="item.url" class="buttonMenuMobile">
+    <div id="menu" :class="{'mobile': mobile}">
+        <ul class="areaMenu">
+            <li v-for="item in itensMenu" class="areaButtonMenu">
+                <router-link :to="item.url" class="buttonMenu">
                  
-                    <div class="buttonMenuMobileIcon center" :style="buttonSelect(item.url)">
+                    <div class="buttonMenuIcon center" :style="buttonSelect(item.url)">
                         <i :class="item.icon" style="font-size: 2rem;"/>
                     </div>
                     <p>{{ item.title }}</p>
                 </router-link>
             </li>
             <li>
-                <div class="buttonMenuMobile clicked" @click="darkMode()">
-                    <div class="buttonMenuMobileIcon center" >
+                <div class="buttonMenu clicked" @click="darkMode()">
+                    <div class="buttonMenuIcon center" >
                         <i class="fa-solid fa-lightbulb" style="font-size: 2rem;"/>
                     </div>
                     <p>TEMA</p> 
@@ -65,13 +65,19 @@ export default {
 }
 </script>
 <style>
-#menuMobile {
+#menu {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: auto;
+    left: 0;
+    bottom: 0;
     width: 100%;
     height: 4.5rem;
     
     background-color: var(--color-primary);
 }
-.buttonMenuMobileIcon {
+.buttonMenuIcon {
     height: 100%;
     width: 5rem;
     aspect-ratio: 2/1;
@@ -81,7 +87,7 @@ export default {
 
     user-select: none;
 }
-.buttonMenuMobile {
+.buttonMenu {
     width: 100%;
     height: 100%;
     display: flex;
@@ -98,15 +104,19 @@ export default {
    -ms-user-select: none;
     user-select: none;
 }
-.areaMenuMobile {
+.areaMenu {
     display: flex;
     margin-top: 0.2rem;
     justify-content: space-around;
     align-items: center;
-
+    flex: 1;
     user-select: none;
 }
-.areaButtonMobile {
+#menu:not(.mobile) .areaMenu {
+    min-width: 500px;
+    max-width: 1000px;
+}
+.areaButton {
     width: 100%;
     margin: 0.2rem;
 

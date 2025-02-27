@@ -25,6 +25,6 @@ app.config.globalProperties.mobile = /Mobi|Android|Iphone/.test(navigator.userAg
 app.config.globalProperties.pinia = authStore();
 
 app.component('menu-mobile', MenuMobile);
-
+console.log(/Mobi|Android|Iphone/.test(navigator.userAgent));
 if(localStorage.getItem('modo')) document.getElementById('app').classList.add('dark');
 app.mount('#app');
