@@ -11,7 +11,7 @@
                     <h1>{{ title }}</h1>
                 </div>
                 <div class="listItensMenuProductPG" :class="{'mobile': mobile}">
-                    <card-item-menu class="itenMenuProductPG"  v-for="(product, keyS) in filtro" :product="product" :add="(prod) => addProduct(prod)" @click="openProduct(product)"/>
+                    <card-item-menu class="itemMenuProductPG"  v-for="(product, keyS) in filtro" :product="product" :add="(prod) => addProduct(prod)" @click="openProduct(product)"/>
                 </div>
             </div>
             <!--<menu-mobile/>-->
@@ -37,9 +37,9 @@
                         <h1>Carregando</h1>
                     </div>
                     <div class="listItensMenuProductPG" :class="{'mobile': mobile}">
-                        <div class="itenMenuProductPG animationLoadPage round" ></div>
-                        <div class="itenMenuProductPG animationLoadPage round" ></div>
-                        <div class="itenMenuProductPG animationLoadPage round" ></div>
+                        <div class="itemMenuProductPG animationLoadPage round" ></div>
+                        <div class="itemMenuProductPG animationLoadPage round" ></div>
+                        <div class="itemMenuProductPG animationLoadPage round" ></div>
                     </div>
                 </div>
                 
@@ -160,7 +160,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
 #menuProductPG {
     min-height: 100vh;
 }
@@ -169,7 +169,7 @@ export default {
     max-width: 1000px;
     padding: 1rem;
 }
-#menuProductPG .mobile {
+#menuProductPG.mobile {
     width: 100%;
 }
 .listItensMenuProductPG {
@@ -179,27 +179,71 @@ export default {
     gap: 0.5rem;
     padding: 0.5rem;
 }
-.listItensMenuProductPG .mobile  {
+.listItensMenuProductPG.mobile  {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
     padding: 0.5rem;
-
-    
 }
-.itenMenuProductPG {
+.itemMenuProductPG {
    width: 100%;
    aspect-ratio: 1/1.5;
+   cursor: pointer;
 }
 
+.filterMenuPG {
+    min-width: 8rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.menuPGFilter {
+    width: 100%;
+    height: fit-content;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+    justify-content: space-around;
+
+    overflow-x: visible;
+    scrollbar-width: none;
+
+    border: 0px solid rgba(0, 0, 0, 0.1);
+    border-top-width: 1px;
+}
+.menuPGFilter.mobile {
+    overflow-x: scroll;
+}
+.menuPGFilter::-webkit-scrollbar {
+    display: none;
+}
+.listItensMenuPGMobile, .listItensMenuPG {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+ 
+    margin-bottom: 5rem;
+
+    color: var(--color-primary-inverse);
+}
+.listItensMenuPG:not(.mobile) {
+    min-width: 500px;
+    max-width: 1000px;
+    
+}
+
+
+
+
 @media screen and (orientation: landscape ) {
-    .listItensMenuProductPG .mobile  {
+    .listItensMenuProductPG.mobile  {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 @media screen and (orientation: landscape ) and (min-width: 680px){
-    .listItensMenuProductPG .mobile  {
+    .listItensMenuProductPG.mobile  {
         grid-template-columns: repeat(6, 1fr);
     }
 }

@@ -258,12 +258,12 @@ export default {
     mounted() {
         
         this.index();
-        
+        console.log(this.mobile);
         
     }
 }
 </script>
-<style >
+<style scoped>
 .sumir {
     display: none;
 }
@@ -291,13 +291,13 @@ export default {
     align-items: start;
     justify-content: space-around;
 
-    overflow-x: scroll;
+    overflow-x: visible;
     scrollbar-width: none;
 
     border: 0px solid rgba(0, 0, 0, 0.1);
     border-top-width: 1px;
 }
-.menuPGFilter > .mobile {
+.menuPGFilter.mobile {
     overflow-x: scroll;
 }
 .menuPGFilter::-webkit-scrollbar {
@@ -313,7 +313,7 @@ export default {
 
     color: var(--color-primary-inverse);
 }
-.listItensMenuPG {
+.listItensMenuPG:not(.mobile) {
     min-width: 500px;
     max-width: 1000px;
     
