@@ -11,7 +11,8 @@ module.exports = {
         price: 45.00,
         image: 'https://alegrafoods.com.br/wp-content/uploads/2020/07/9-img-blog.png',
         promotion: false,
-        category_id: 1
+        category_id: 1,
+        kitchen: true
       },
       {
         title: 'Pizza média com borda recheada',
@@ -19,7 +20,8 @@ module.exports = {
         price: 40.00,
         image: 'https://www.minhareceita.com.br/app/uploads/2022/12/pizza-de-pepperoni-caseira-portal-minha-receita.jpg',
         promotion: false,
-        category_id: 1
+        category_id: 1,
+        kitchen: true
       },
       {
         title: 'Pizza pequena com borda recheada',
@@ -27,7 +29,8 @@ module.exports = {
         price: 35.50,
         image: 'https://www.minhareceita.com.br/app/uploads/2022/12/pizza-de-pepperoni-caseira-portal-minha-receita.jpg',
         promotion: false,
-        category_id: 1
+        category_id: 1,
+        kitchen: true
       },
       {
         title: 'Pizza grade de queijo',
@@ -35,7 +38,8 @@ module.exports = {
         price: 35.00,
         image: 'https://alegrafoods.com.br/wp-content/uploads/2020/07/9-img-blog.png',
         promotion: false,
-        category_id: 1
+        category_id: 1,
+        kitchen: true
       },
       {
         title: 'Pizza grade de carne',
@@ -43,7 +47,8 @@ module.exports = {
         price: 45.00,
         image: 'https://alegrafoods.com.br/wp-content/uploads/2020/07/9-img-blog.png',
         promotion: false,
-        category_id: 1
+        category_id: 1,
+        kitchen: true
       },
       {
         title: 'Hamburguer duplo de calabresa',
@@ -51,7 +56,8 @@ module.exports = {
         price: 22.00,
         image: 'https://www.estadao.com.br/resizer/v2/77XTHHCCLBEXLC2Y5RK4PN37CE.jpg?quality=80&auth=a86d285f74ec7c08de7ba6ec10d557a463d905ffec2e56009d737687ac6054a1&width=720&height=503&focal=553,494',
         promotion: true,
-        category_id: 2
+        category_id: 2,
+        kitchen: true
       },
       {
         title: 'Hamburguer com cheddar duplo',
@@ -59,7 +65,8 @@ module.exports = {
         price: 26.00,
         image: 'https://www.estadao.com.br/resizer/v2/77XTHHCCLBEXLC2Y5RK4PN37CE.jpg?quality=80&auth=a86d285f74ec7c08de7ba6ec10d557a463d905ffec2e56009d737687ac6054a1&width=720&height=503&focal=553,494',
         promotion: true,
-        category_id: 2
+        category_id: 2,
+        kitchen: true
       },
       {
         title: 'Hamburguer original',
@@ -67,7 +74,8 @@ module.exports = {
         price: 10.00,
         image: 'https://www.estadao.com.br/resizer/v2/77XTHHCCLBEXLC2Y5RK4PN37CE.jpg?quality=80&auth=a86d285f74ec7c08de7ba6ec10d557a463d905ffec2e56009d737687ac6054a1&width=720&height=503&focal=553,494',
         promotion: false,
-        category_id: 2
+        category_id: 2,
+        kitchen: true
       },
     ]);
   },

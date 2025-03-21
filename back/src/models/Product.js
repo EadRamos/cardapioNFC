@@ -55,7 +55,11 @@ Product.init({
     },
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-  }
+  },
+  kitchen: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true,
+  },
 }, {
     sequelize,
     modelName: 'Product',

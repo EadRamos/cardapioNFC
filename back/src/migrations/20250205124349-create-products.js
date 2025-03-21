@@ -41,7 +41,11 @@ module.exports = {
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
-      }
+      },
+      kitchen: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
     });
   },
 

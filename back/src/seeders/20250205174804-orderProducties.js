@@ -10,36 +10,50 @@ module.exports = {
         order_id: 1,
         product_id: 1,
         amount: 1,
+        status: 'wait',
+        accepted: false,
       },
       {
         order_id: 1,
         product_id: 6,
         amount: 2,
+        status: 'wait',
+        accepted: false,
       },
       {
         order_id: 2,
         product_id: 3,
         amount: 1,
+        status: 'wait',
+        accepted: false,
       },
       {
         order_id: 4,
         product_id: 7,
         amount: 3,
+        status: 'wait',
+        accepted: false,
       },
       {
         order_id:3,
         product_id: 1,
         amount: 1,
+        status: 'wait',
+        accepted: false,
       },
       {
         order_id: 5,
         product_id: 2,
         amount: 1,
+        status: 'wait',
+        accepted: false,
       },
       {
         order_id: 5,
         product_id: 1,
         amount: 1,
+        status: 'wait',
+        accepted: false,
       }
     ]);
 

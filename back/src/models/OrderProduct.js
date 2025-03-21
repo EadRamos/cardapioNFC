@@ -34,7 +34,15 @@ OrderProduct.init({
       amount: {
         type: Sequelize.SMALLINT,
         defaultValue: 1,
-      }
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: ['wait', 'preparation', 'delivery', 'finished']
+      },
+      accepted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
 }, {
     sequelize,
     modelName: 'OrderProduct',

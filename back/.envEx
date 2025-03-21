@@ -1,9 +1,9 @@
 PG_HOST=localhost
-PG_USER=postgres
+PG_USER=root
 PG_PASSWORD=root
-PG_DB=postgres
-BD=postgres
-PORT=8001
+PG_DB=cardapiobd
+BD=mysql
+PORT=3306
 ENVERONMENT=development
 GOOGLE_FOLDER_ID=1O_BUuNcOWO-RsvOWfh2j3wtplwAptLFy
 TOKEN_LOGIN=12345678

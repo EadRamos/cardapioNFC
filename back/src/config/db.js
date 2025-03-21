@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-const PG_USER = process.env.PG_USER || 'postgres';
+const PG_USER = process.env.PG_USER || 'root';
 const PG_PASSWORD = process.env.PASSWORD || 'root';
-const PG_DB = process.env.PG_DB || 'postgres';
+const PG_DB = process.env.PG_DB || 'cardapiobd';
 const PG_HOST = process.env.PG_HOST || 'localhost';
-const DIALECT = process.env.DB || 'postgres';
+const DIALECT = process.env.DB || 'mysql';
 
 module.exports = {
     development: {
