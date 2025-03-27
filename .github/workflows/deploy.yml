@@ -3,7 +3,7 @@ name: Deploy de produção
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   deploy:
@@ -19,12 +19,12 @@ jobs:
           node-version: '20'
       
       - name: Instalando dependencias backend
-        working-directory: ./back
         run: npm install
-
+        working-directory: ./back
+        
       - name: Instalando dependencias frontend
-        working-directory:: ./front
         run: npm run build
+        working-directory: ./front
       
       - name: Deploy no servidor
         uses: appleboy/ssh-action@v1.0.0
