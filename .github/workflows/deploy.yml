@@ -7,7 +7,8 @@ on:
 
 jobs:
   deploy:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checando codigo
@@ -38,8 +39,8 @@ jobs:
             cd back
             npm install --production
             pm2 restart ecosystem.config.js
-            cd ..front
-            rm -rf /var/www/frontend/*
-            rm -rf dist/*
-            cp -r dist/* /var/www/frontend/
+            cd ../front
+            sudo rm -rf /var/www/frontend/*
+            sudo cp -r dist/* /var/www/frontend/
+            sudo chown -R www-data:www-data /var/www/frontend
             sudo systemctl reload nginx
