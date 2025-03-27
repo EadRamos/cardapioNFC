@@ -1,7 +1,9 @@
 back/node_modules
 back/.env
+back/src/config/key-drive.json
 front/node_modules
 front/.env
+front/dist
 
 # Logs
 front/logs
