@@ -28,6 +28,11 @@ jobs:
           npm install
           npm run build
         working-directory: ./front
+      - name: Debug Connection
+        run: |
+          echo "Verificando chave SSH..."
+          ls -la ~/.ssh/
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       
       - name: Deploy no servidor
         uses: appleboy/ssh-action@v1.0.0
@@ -36,6 +41,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
+          passphrase: ""
           script: |
             cd ~/cardapioNFC
             git pull origin main
