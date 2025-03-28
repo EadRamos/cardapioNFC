@@ -28,12 +28,19 @@ jobs:
           npm install
           npm run build
         working-directory: ./front
-      - name: Debug Connection
+      - name: Debug SSH Connection
         run: |
-          echo "Verificando chave SSH..."
-          ls -la ~/.ssh/
+          echo "▶️ 1. Criando diretório .ssh..."
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          
+          echo "▶️ 2. Adicionando host aos known_hosts..."
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      
+          
+          echo "✅ 3. Verificando fingerprint..."
+          ssh-keygen -lf <(ssh-keyscan -H ${{ secrets.SSH_HOST }} 2>/dev/null)
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          
       - name: Deploy no servidor
         uses: appleboy/ssh-action@v1.0.0
         with:
